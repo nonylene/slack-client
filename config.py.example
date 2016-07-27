@@ -1,0 +1,4 @@
+TOKEN = "xoxp-XXXXXXXXXXXXXX"
+DEFAULT_USERNAME = "bot"
+EMOJI_WATCH_CHANNEL = "#emoji"
+DEBUG_CHANNEL = "#bot-debug"
