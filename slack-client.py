@@ -3,6 +3,7 @@ import urllib.parse
 import urllib.request
 import json
 import traceback
+import time
 
 import config
 
@@ -22,6 +23,7 @@ def on_close(ws, *close_args):
     if not interrupted:
         # retry
         print("reconnecting...")
+        time.sleep(1)
         connect()
 
 def on_error(ws, error):
