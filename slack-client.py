@@ -23,7 +23,7 @@ def on_close(ws, *close_args):
     if not interrupted:
         # retry
         print("reconnecting...")
-        time.sleep(1)
+        time.sleep(2)
         connect()
 
 def on_error(ws, error):
@@ -55,8 +55,7 @@ def emoji_watch(data):
         emojis = data["names"]
 
     for emoji in emojis:
-        emoji_str = ":{0}:".format(emoji)
-        message = "{0} {1} {2}!".format(prefix_emoji, emoji_str, data["subtype"])
+        message = "{0} :{1}: ({1}) {2}!".format(prefix_emoji, emoji, data["subtype"])
         post_message(config.EMOJI_WATCH_CHANNEL, message, username = "Emoji Watcher", icon_emoji = icon_emoji)
 
 def connect():
