@@ -68,7 +68,7 @@ def channel_watch(data):
     def post_channel_message(text):
         post_message(
                 config.CHANNEL_WATCH_CHANNEL,
-                ":rooster: " + text,
+                text,
                 'channel-bot',
                 ':tokyo_tower:'
                 )
@@ -80,20 +80,20 @@ def channel_watch(data):
     # https://api.slack.com/events/channel_unarchive
     if data['type'] == 'channel_archive':
         post_channel_message(
-                'Archived: {0}'.format(channel_link(data['channel']))
+                ':ghost: Archived: {0}'.format(channel_link(data['channel']))
                 )
 
     elif data['type'] == 'channel_created':
         channel_id = data['channel']['id']
         channels[channel_id] = data['channel']['name']
         post_channel_message(
-                'Created: {0}'.format(channel_link(channel_id))
+                ':hatching_chick: Created: {0}'.format(channel_link(channel_id))
                 )
 
     elif data['type'] == 'channel_deleted':
         channel_name = channels.pop(data['channel'])
         post_channel_message(
-                'Deleted: #{0}'.format(channel_name)
+                ':see_no_evil: Deleted: #{0}'.format(channel_name)
                 )
 
     elif data['type'] == 'channel_rename':
@@ -101,7 +101,7 @@ def channel_watch(data):
         old_channel_name = channels[channel_id]
         channels[channel_id] = data['channel']['name']
         post_channel_message(
-                'Renamed: #{0} :arrow_right: {1}'.format(
+                ':fog: Renamed: #{0} :arrow_right: {1}'.format(
                     old_channel_name,
                     channel_link(channel_id)
                     )
@@ -109,7 +109,7 @@ def channel_watch(data):
 
     elif data['type'] == 'channel_unarchive':
         post_channel_message(
-                'Unarchived: {0}'.format(channel_link(data['channel']))
+                ':sushi: Unarchived: {0}'.format(channel_link(data['channel']))
                 )
 
 def connect():
