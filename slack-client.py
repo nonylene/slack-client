@@ -50,14 +50,16 @@ def emoji_watch(data):
     if "add" == subtype:
         icon_emoji = ":{0}:".format(data["name"])
         prefix_emoji = ":raising_hand:"
+        text = "Added"
         emojis = [data["name"]]
     else:
         icon_emoji = ":upside_down_face:"
         prefix_emoji = ":wave:"
+        text = "Removed"
         emojis = data["names"]
 
     for emoji in emojis:
-        message = "{0} :{1}: ({1}) {2}!".format(prefix_emoji, emoji, data["subtype"])
+        message = "{0} {1}: :{2}: ({2})".format(prefix_emoji, text, emoji)
         post_message(config.EMOJI_WATCH_CHANNEL, message, username = "Emoji Watcher", icon_emoji = icon_emoji)
 
 def channel_watch(data):
