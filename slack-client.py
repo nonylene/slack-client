@@ -130,7 +130,7 @@ def connect():
         raise
 
     try:
-        start_api = "https://slack.com/api/rtm.start?{0}".format(params)
+        start_api = "https://slack.com/api/rtm.connect?{0}".format(params)
         res = urllib.request.urlopen(start_api)
         start_data = json.loads(res.read().decode())
         websocket_url = start_data["url"]
