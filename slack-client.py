@@ -60,7 +60,7 @@ def emoji_watch(data):
 
     for emoji in emojis:
         message = "{0} {1}: :{2}: ({2})".format(prefix_emoji, text, emoji)
-        post_message(config.EMOJI_WATCH_CHANNEL, message, username = "Emoji Watcher", icon_emoji = icon_emoji)
+        post_message(config.EMOJI_WATCH_CHANNEL, message, "emoji-bot", icon_emoji)
 
 def channel_watch(data):
 
