@@ -3,13 +3,19 @@ my super useful slack client
 
 ## Requirements
 
-- websocket-client
+- pipenv
 - Python 3
+
+## Setup
+
+```sh
+$ pipenv install
+```
 
 ## Launch
 
 After fill `config.py`,
 
 ```sh
-$ python3 slack-client.py
+$ pipenv run python3 slack-client.py
 ```

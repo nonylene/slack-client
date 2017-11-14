@@ -60,3 +60,4 @@ target/
 
 # nony
 config.py
+.venv/
