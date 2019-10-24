@@ -12,20 +12,20 @@ channels = dict()
 
 
 def on_open(ws):
-    message = "connection opened!"
+    message = "Connection opened!"
     print(message)
     # post slack
     post_text(config.DEBUG_CHANNEL, message)
 
 
 def on_close(ws, *close_args):
-    message = "connection closed!"
+    message = "Connection closed!"
     print(message)
     # post slack error
     post_text(config.DEBUG_CHANNEL, message)
     if not interrupted:
         # retry
-        print("reconnecting...")
+        print("Reconnecting...")
         time.sleep(2)
         connect()
 
@@ -50,7 +50,6 @@ def emoji_watch(data):
     # https://api.slack.com/events/emoji_changed
     if not "emoji_changed" == data["type"]:
         return
-    print(data)
 
     subtype = data["subtype"]
     if "add" == subtype:
