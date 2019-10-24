@@ -59,7 +59,7 @@ def emoji_watch(data):
         # If alias is added, we cannot know url.
         value = data['value']
         aliased = value.startswith('alias:')
-        if not aliased:
+        if aliased:
             message =  f":raising_hand: Alias added: {emoji} (*{name}*, {value})"
         else:
             message =  f":raising_hand: Added: {emoji} (*{name}*)"
