@@ -61,28 +61,34 @@ def emoji_watch(data):
         aliased = value.startswith('alias:')
         if aliased:
             message =  f":raising_hand: Alias added: {emoji} (*{name}*, {value})"
+            post_text(
+                config.EMOJI_WATCH_CHANNEL, message,
+                "emoji-bot", emoji,
+            )
+
         else:
             message =  f":raising_hand: Added: {emoji} (*{name}*)"
 
-        block = {
-            "type": "section",
-            "text": {
-                "type": "mrkdwn",
-                "text": message,
-            },
-        }
-
-        if not aliased:
-            block['accessory'] =  {
-                "type": "image",
-                "image_url": value,
-                "alt_text": emoji,
+            block = {
+                "type": "section",
+                "text": {
+                    "type": "mrkdwn",
+                    "text": message,
+                },
+                "accessory": {
+                    "type": "image",
+                    "image_url": value,
+                    "alt_text": emoji,
+                }
             }
-
-        post_message(
-            config.EMOJI_WATCH_CHANNEL, {'blocks': [block]},
-            "emoji-bot", emoji
-        )
+            data = {
+                "text": message,
+                "blocks": [block],
+            }
+            post_message(
+                config.EMOJI_WATCH_CHANNEL, data,
+                "emoji-bot", emoji
+            )
 
     else:
         # Remove
