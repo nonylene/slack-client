@@ -141,13 +141,11 @@ def channel_watch(data):
     elif data['type'] == 'channel_rename':
         channel_id = data['channel']['id']
         old_channel_name = channels[channel_id]
-        channels[channel_id] = data['channel']['name']
+        new_channel_name = data['channel']['name']
+        channels[channel_id] = new_channel_name
         post_channel_message(
-                ':fog: Renamed: #{0} :arrow_right: {1}'.format(
-                    old_channel_name,
-                    channel_link(channel_id)
-                    )
-                )
+            f':ocean: Renamed: {channel_link(channel_id)} (#{old_channel_name} :arrow_right: #{new_channel_name})'
+        )
 
     elif data['type'] == 'channel_unarchive':
         post_channel_message(
