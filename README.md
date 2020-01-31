@@ -9,7 +9,7 @@ my super useful slack client
 ## Setup
 
 ```sh
-$ pipenv install
+$ poetry install
 ```
 
 ## Launch
@@ -17,5 +17,5 @@ $ pipenv install
 After fill `config.py`,
 
 ```sh
-$ pipenv run python3 slack-client.py
+$ poetry run python3 slack-client.py
 ```
