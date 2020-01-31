@@ -10,4 +10,3 @@ RUN poetry install --no-dev
 COPY . /app/
 
 CMD ["poetry", "run", "python3", "slack-client.py"]
-

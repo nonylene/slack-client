@@ -27,6 +27,14 @@ version = "1.5"
 pycodestyle = ">=2.5.0"
 
 [[package]]
+category = "main"
+description = "Composable command line interface toolkit"
+name = "click"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "7.0"
+
+[[package]]
 category = "dev"
 description = "Cross-platform colored terminal text."
 marker = "sys_platform == \"win32\""
@@ -165,7 +173,7 @@ python-versions = "*"
 version = "1.11.2"
 
 [metadata]
-content-hash = "46115b0ef8d3976f954c69c713892933d372dee6a3253dc68fbdadab39a2ae11"
+content-hash = "fbffa0d6a98b1e0a768d228acb1e3452e6e7535f0f8b05d392f3251e73771d2d"
 python-versions = "^3.7"
 
 [metadata.files]
@@ -175,6 +183,10 @@ astroid = [
 ]
 autopep8 = [
     {file = "autopep8-1.5.tar.gz", hash = "sha256:0f592a0447acea0c2b0a9602be1e4e3d86db52badd2e3c84f0193bfd89fd3a43"},
+]
+click = [
+    {file = "Click-7.0-py2.py3-none-any.whl", hash = "sha256:2335065e6395b9e67ca716de5f7526736bfa6ceead690adf616d925bdc622b13"},
+    {file = "Click-7.0.tar.gz", hash = "sha256:5b94b49521f6456670fdb30cd82a4eca9412788a93fa6dd6df72c94d5a8ff2d7"},
 ]
 colorama = [
     {file = "colorama-0.4.3-py2.py3-none-any.whl", hash = "sha256:7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff"},
