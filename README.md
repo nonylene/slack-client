@@ -6,7 +6,7 @@ My super useful slack client.
 
 ## Requirements
 
-- pipenv
+- poetry
 - Python 3
 
 ## Setup
