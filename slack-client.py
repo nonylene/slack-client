@@ -243,14 +243,15 @@ def post_message(
 @click.option('--emoji-watch-channel', help='emoji-watch channel', type=str, required=True,  show_envvar=True)
 @click.option('--channel-watch-channel', help='channel-watch channel', type=str, required=True,  show_envvar=True)
 @click.option('--debug-channel', help='Debug channel', type=str, required=True,  show_envvar=True)
-def config(
+def main(
     token, default_username, emoji_watch_channel, channel_watch_channel, debug_channel
 ):
-    return Config(
+    global config
+    config = Config(
         token, default_username, emoji_watch_channel, channel_watch_channel, debug_channel
     )
+    connect()
 
 
 if __name__ == "__main__":
-    config = config(auto_envvar_prefix='SLACK_CLIENT')
-    connect()
+    main(auto_envvar_prefix='SLACK_CLIENT')
