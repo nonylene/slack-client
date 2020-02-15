@@ -61,3 +61,6 @@ target/
 # nony
 config.py
 .venv/
+
+.env
+.vscode
