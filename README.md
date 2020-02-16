@@ -6,8 +6,8 @@ My super useful slack client.
 
 ## Requirements
 
-- poetry
-- Python 3
+- [poetry](https://github.com/python-poetry/poetry)
+- Python 3.7~
 
 ## Setup
 
