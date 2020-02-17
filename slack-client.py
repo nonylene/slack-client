@@ -25,6 +25,10 @@ channels = dict()
 config: Config = None
 
 
+def _get_authorization_header():
+    return {'Authorization': f'Bearer {config.token}'}
+
+
 async def notify_open():
     message = "Connection opened!"
     print(message)
@@ -156,24 +160,23 @@ async def channel_watch(data):
 
 
 async def connect():
-    token_params = {'token': config.token}
     try:
         # Initial -> get channel list
-        r = await client.get('https://slack.com/api/channels.list', params=token_params)
+        r = await client.get('https://slack.com/api/channels.list', headers=_get_authorization_header())
         list_data = r.json()
         global channels
         channels = {c["id"]: c["name"] for c in list_data["channels"]}
     except Exception as e:
         await post_text(
             config.debug_channel,
-            "get channel list failed: {0}".format(e),
+            "Failed to get channel list: {0}".format(e),
             ":upside_down_face:"
         )
         raise
 
     try:
         while True:
-            r = await client.get('https://slack.com/api/rtm.connect', params=token_params)
+            r = await client.get('https://slack.com/api/rtm.connect', headers=_get_authorization_header())
             start_data = r.json()
             websocket_url = start_data["url"]
             try:
@@ -191,7 +194,7 @@ async def connect():
     except Exception as e:
         await post_text(
             config.debug_channel,
-            "create websocket failed: {0}".format(e),
+            "Failed to create websocket: {0}".format(e),
             ":upside_down_face:"
         )
         raise
@@ -213,13 +216,14 @@ async def post_message(
     if username is None:
         username = config.default_username
     base = {
-        "token": config.token,
         "channel": channel,
         "icon_emoji": icon_emoji,
         "username": username
     }
     merged = {**data_dict, **base}
-    await client.post("https://slack.com/api/chat.postMessage", data=merged)
+    await client.post(
+        "https://slack.com/api/chat.postMessage", json=merged, headers=_get_authorization_header()
+    )
 
 
 @click.command()
