@@ -1,13 +1,14 @@
-import json
-import traceback
-import time
 import asyncio
+import json
+import time
+import traceback
 from dataclasses import dataclass
+from typing import Dict
 
-import websockets
-import websockets.exceptions
 import click
 import httpx
+import websockets
+import websockets.exceptions
 
 client = httpx.AsyncClient()
 
@@ -159,13 +160,34 @@ async def channel_watch(data):
         )
 
 
-async def connect():
-    try:
-        # Initial -> get channel list
-        r = await client.get('https://slack.com/api/channels.list', headers=_get_authorization_header())
+async def get_all_public_channels() -> Dict[str, str]:
+    cursor = None
+    channels = {}
+    while True:
+        # https://api.slack.com/methods/conversations.list
+        r = await client.get(
+            'https://slack.com/api/conversations.list',
+            headers=_get_authorization_header(),
+            params={"cursor": cursor, "limit": 1000, "types": 'public_channel'},
+        )
         list_data = r.json()
+
+        for channel in list_data['channels']:
+            channels[channel['id']] = channel['name']
+
+        if not (cursor := list_data['response_metadata'].get('next_cursor')):
+            break
+
+        await asyncio.sleep(2)
+
+    return channels
+
+
+async def connect():
+    # Initial -> get channel list
+    try:
         global channels
-        channels = {c["id"]: c["name"] for c in list_data["channels"]}
+        channels = await get_all_public_channels()
     except Exception as e:
         await post_text(
             config.debug_channel,
